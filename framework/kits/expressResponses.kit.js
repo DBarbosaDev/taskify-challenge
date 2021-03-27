@@ -44,6 +44,18 @@ const sendError = (expressResponse, errorDetails) => {
 };
 
 /**
+ * Submit an express response of unauthorized type
+ * @param {Object} expressResponse Express Response dependency
+ * @param {Object} errorDetails Object with the error details
+ * @param {String} errorDetails.code Error code
+ * @param {String} errorDetails.stack Error stack trace
+ * @param {String | Object} errorDetails.message Error message
+ */
+const sendUnauthorizedError = (expressResponse, errorDetails) => {
+    sendResponse(expressResponse, 401, { error: errorDetails });
+};
+
+/**
  * Submit an express response of forbidden type
  * @param {Object} expressResponse Express Response dependency
  * @param {Object} errorDetails Object with the error details
@@ -52,7 +64,7 @@ const sendError = (expressResponse, errorDetails) => {
  * @param {String | Object} errorDetails.message Error message
  */
 const sendForbiddenError = (expressResponse, errorDetails) => {
-    sendResponse(expressResponse, 401, { error: errorDetails });
+    sendResponse(expressResponse, 403, { error: errorDetails });
 };
 
 /**
@@ -86,6 +98,7 @@ module.exports = {
 
     // status code 4xx
     sendError,
+    sendUnauthorizedError,
     sendForbiddenError,
     sendPreRequirementsFailureError,
 

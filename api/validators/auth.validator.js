@@ -52,6 +52,26 @@ const validateRegistParams = () => {
     return [...validationsSeries, validatorCallback];
 };
 
+const validateLoginParams = () => {
+    const FIELDS_VALIDATION_OPTIONS = CONSTANTS.FIELDS_VALIDATION_OPTIONS;
+    const validationsSeries = [
+        body('email')
+            .isEmail()
+            .withMessage(FIELDS_VALIDATION_OPTIONS.EMAIL.INVALID.ERROR_CODE)
+            .isLength({ max: FIELDS_VALIDATION_OPTIONS.EMAIL.MAX_SIZE.VALUE })
+            .withMessage(FIELDS_VALIDATION_OPTIONS.EMAIL.MAX_SIZE.ERROR_CODE),
+
+        body('password')
+            .not().isEmpty()
+            .withMessage(FIELDS_VALIDATION_OPTIONS.PASSWORD.REQUIRED.ERROR_CODE)
+            .isLength({ max: FIELDS_VALIDATION_OPTIONS.PASSWORD.MAX_SIZE.VALUE })
+            .withMessage(FIELDS_VALIDATION_OPTIONS.PASSWORD.MAX_SIZE.ERROR_CODE)
+    ];
+
+    return [...validationsSeries, validatorCallback];
+};
+
 module.exports = {
-    validateRegistParams
+    validateRegistParams,
+    validateLoginParams
 };

@@ -8,8 +8,7 @@ const UserModelSchema = new mongoose.Schema({
     },
     surname: {
         type: String,
-        trim: true,
-        required: true
+        trim: true
     },
     email: {
         type: String,
