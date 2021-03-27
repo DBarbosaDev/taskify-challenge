@@ -2,10 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-const userRoutes = require('./user.route');
+const authRoutes = require('./auth.route');
 const { sessionMiddleware } = require('../middlewares');
 
-router.use(userRoutes);
+router.use(authRoutes);
 
 router.use(sessionMiddleware.checkBearerTokenVeracity);
 
