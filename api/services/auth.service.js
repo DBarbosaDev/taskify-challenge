@@ -27,7 +27,7 @@ const login = async (requesterIp = null, details = {}) => {
     const { _id, name, surname } = details;
 
     const tokenCreationPromise = new Promise((resolve, reject) => {
-        jwt.sign({ _id, ipAddress: requesterIp }, configs.JWT_PRIVATE_KEY, { expiresIn: '24h' }, (err, token) => {
+        jwt.sign({ userId: _id, ipAddress: requesterIp }, configs.JWT_PRIVATE_KEY, { expiresIn: '24h' }, (err, token) => {
             if (err) {
                 return reject(err);
             }
