@@ -5,6 +5,8 @@ const configs = require('../../configs');
 const { ERROR_CODES_CONSTANTS, expressResponsesKit, expressRequestsKit } = require('../../framework');
 
 const checkBearerTokenVeracity = async (req, res, next) => {
+    let decodedToken;
+
     const token = expressRequestsKit.getBearerToken(req);
 
     if (!token) {
@@ -15,17 +17,17 @@ const checkBearerTokenVeracity = async (req, res, next) => {
     const requesterIp = expressRequestsKit.getRequesterIp(req);
 
     const tokenVerificationPromise = new Promise((resolve, reject) => {
-        jwt.verify(token, configs.JWT_PRIVATE_KEY, (err, decodedToken) => {
+        jwt.verify(token, configs.JWT_PRIVATE_KEY, (err, decoded) => {
             if (err) {
                 return reject(err);
             }
 
-            return resolve(decodedToken);
+            return resolve(decoded);
         });
     });
 
     try {
-        const decodedToken = await tokenVerificationPromise;
+        decodedToken = await tokenVerificationPromise;
 
         if (decodedToken.ipAddress !== requesterIp) {
             expressResponsesKit.sendUnauthorizedError(res, { code: ERROR_CODES_CONSTANTS.INVALID_BEARER_TOKEN });
@@ -37,6 +39,7 @@ const checkBearerTokenVeracity = async (req, res, next) => {
         return;
     }
 
+    res.locals.userId = decodedToken.userId;
     next();
 };
 

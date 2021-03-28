@@ -37,6 +37,15 @@ module.exports = {
             REQUIRED: {
                 ERROR_CODE: ERROR_CODES_CONSTANTS.PASSWORD_REQUIRED
             }
+        },
+        PROJECT_NAME: {
+            MAX_SIZE: {
+                VALUE: 40,
+                ERROR_CODE: ERROR_CODES_CONSTANTS.PROJECT_NAME_MAX_SIZE_40_EXCEEDED
+            },
+            INVALID: {
+                ERROR_CODE: ERROR_CODES_CONSTANTS.INVALID_PROJECT_NAME_STRING
+            }
         }
     }
 };
