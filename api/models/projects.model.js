@@ -14,6 +14,7 @@ const ProjectModelSchema = new mongoose.Schema({
     refTasks: [
         { type: mongoose.Schema.Types.ObjectId, ref: 'tasks' }
     ],
+    updateDate: Date,
     creationDate: {
         type: Date,
         default: Date.now,
@@ -34,7 +35,22 @@ const getUserProjects = (userId) => {
 
 const addProject = (userId, dataObject) => ProjectModel.create({ ...dataObject, refUser: mongoose.Types.ObjectId(userId) });
 
+const updateProject = (userId, projectId, dataObject) => {
+    return ProjectModel.findOneAndUpdate(
+        { _id: mongoose.Types.ObjectId(projectId), refUser: mongoose.Types.ObjectId(userId) },
+        { ...dataObject, updateDate: Date.now() }
+    ).exec();
+};
+
+const deleteProject = (userId, projectId) => {
+    return ProjectModel.findOneAndDelete(
+        { _id: mongoose.Types.ObjectId(projectId), refUser: mongoose.Types.ObjectId(userId) }
+    ).exec();
+};
+
 module.exports = {
     getUserProjects,
-    addProject
+    addProject,
+    updateProject,
+    deleteProject
 };

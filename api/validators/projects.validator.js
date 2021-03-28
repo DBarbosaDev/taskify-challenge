@@ -1,4 +1,5 @@
-const { body, validationResult } = require('express-validator');
+const { body, param, validationResult } = require('express-validator');
+const mongoose = require('mongoose');
 
 const CONSTANTS = require('./constants');
 
@@ -26,6 +27,9 @@ const validateProjectParams = () => {
         body('name')
             .isString()
             .withMessage(FIELDS_VALIDATION_OPTIONS.PROJECT_NAME.INVALID.ERROR_CODE)
+            .not()
+            .isEmpty()
+            .withMessage(FIELDS_VALIDATION_OPTIONS.PROJECT_NAME.REQUIRED.ERROR_CODE)
             .isLength({ max: FIELDS_VALIDATION_OPTIONS.PROJECT_NAME.MAX_SIZE.VALUE })
             .withMessage(FIELDS_VALIDATION_OPTIONS.PROJECT_NAME.MAX_SIZE.ERROR_CODE)
     ];
@@ -33,6 +37,21 @@ const validateProjectParams = () => {
     return [...validationsSeries, validatorCallback];
 };
 
+const validateProjectIdParam = () => {
+    const FIELDS_VALIDATION_OPTIONS = CONSTANTS.FIELDS_VALIDATION_OPTIONS;
+
+    const validationsSeries = [
+        param('id')
+            .not().isEmpty()
+            .withMessage(FIELDS_VALIDATION_OPTIONS.PROJECT_ID.REQUIRED.ERROR_CODE)
+            .custom((id = '') => mongoose.Types.ObjectId.isValid(id))
+            .withMessage(FIELDS_VALIDATION_OPTIONS.PROJECT_ID.OBJECT_ID.ERROR_CODE)
+    ];
+
+    return [...validationsSeries, validatorCallback];
+};
+
 module.exports = {
-    validateProjectParams
+    validateProjectParams,
+    validateProjectIdParam
 };
