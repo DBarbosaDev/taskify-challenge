@@ -1,0 +1,48 @@
+<div layout="column" layout-wrap layout-align="center center">
+    <h2 flex>Taskify</h2>
+
+    <md-card flex="100">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Authentication</span>
+            <span class="md-subhead">Login</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        
+        <form name="loginForm" ng-submit="LoginCtrl.onLoginFormSubmission()">
+            <div layout="row" layout-align="center center" layout-margin>
+                <md-progress-circular ng-if="LoginCtrl.waitingForResponse" md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <md-card-content layout="row"  layout-align="center center" ng-show="!LoginCtrl.waitingForResponse">
+                <div layout="column" flex="100">
+                    <md-input-container class="no-margin-left" flex="100" flex-gt-xs="100">
+                        <label>Email</label>
+                        <input type="email" required md-maxlength="40" md-pattern="/^.+@.+\..+$/" name="email" ng-model="LoginCtrl.email">
+                        <div ng-messages="loginForm.email.$error" role="alert">
+                            <div ng-message-exp="['required', 'md-maxlength', 'pattern']">
+                                Your email must be less than 40 characters and look like an e-mail address.
+                            </div>
+                        </div>
+                    </md-input-container>
+            
+                    <md-input-container class="no-margin-left" flex="100" flex-gt-xs="100">
+                        <label>Password</label>
+                        <input type="password" required md-maxlength="40" name="password" ng-model="LoginCtrl.password">
+                        <div ng-messages="loginForm.password.$error" role="alert">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="md-maxlength">The description must be less than 40 characters long.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="space-between center" ng-show="!LoginCtrl.waitingForResponse">
+                <md-button ui-sref="regist" class="md-primary">Regist</md-button>
+                <md-button type="submit" class="md-raised md-primary">Login</md-button>
+            </md-card-actions>
+        </form>
+    </md-card>
+</div>

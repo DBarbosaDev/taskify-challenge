@@ -1,8 +1,41 @@
-<html>
+<!DOCTYPE html>
+<html ng-app="TaskifyApp">
     <head>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <script src="node_modules/angular/angular.min.js"></script>
+
+        <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+        
+        <!-- Angularjs materials -->
+        <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+        <link rel="stylesheet" href="node_modules/material-design-icons/iconfont/material-icons.css">
+        <script src="/node_modules/angular-aria/angular-aria.js"></script>
+        <script src="/node_modules/angular-animate/angular-animate.js"></script>
+        <script src="/node_modules/angular-messages/angular-messages.js"></script>
+        <script src="/node_modules/angular-material/angular-material.js"></script>
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="assets/css/main.css">
+
+        <!-- Scripts -->
+        <script src="app.js"></script>
+        <script src="app.routes.js"></script>
+
+        <!-- Services -->
+        <script src="services/http.service.js"></script>
+        <script src="services/localStorage.service.js"></script>
+        <script src="services/utils.service.js"></script>
+        <script src="views/login/login.service.js"></script>
+        <script src="views/regist/regist.service.js"></script>
+        <script src="views/projects/projects.service.js"></script>
+
+        <!-- Controllers -->
+        <script src="views/login/login.controller.js"></script>
+        <script src="views/regist/regist.controller.js"></script>
+        <script src="views/projects/projects.controller.js"></script>
 
     </head>
     <body>
-        sadasdsd
+        <ui-view></ui-view>
     </body>
 </html>
