@@ -4,7 +4,7 @@ const TasksModelSchema = new mongoose.Schema({
     description: {
         type: String,
         trim: true,
-        require: true
+        required: true
     },
     creationDate: {
         type: Date,
@@ -26,7 +26,7 @@ const ProjectModelSchema = new mongoose.Schema({
         required: true
     },
     refTasks: [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'tasks' }
+        { type: mongoose.Schema.Types.ObjectId, ref: 'TasksModel' }
     ],
     updateDate: Date,
     creationDate: {
@@ -42,13 +42,13 @@ const TasksModel = mongoose.model('TasksModel', TasksModelSchema);
 const getUserProject = (userId, projectId) => {
     return ProjectModel
         .findOne({ _id: mongoose.Types.ObjectId(projectId), refUser: mongoose.Types.ObjectId(userId) })
-        .populate('refTasks', 'description finishDate')
+        .populate('refTasks')
         .exec();
 };
 
 const getUserProjects = (userId) => {
     return ProjectModel.find({ refUser: mongoose.Types.ObjectId(userId) })
-        .populate('refTasks', 'description finishDate')
+        .populate('refTasks')
         .exec();
 };
 
@@ -83,26 +83,37 @@ const deleteProject = (userId, projectId) => {
 const addProjectTask = async (userId, projectId, dataObject = {}) => {
     const createdTask = (await TasksModel.create(dataObject)) || {};
 
-    return ProjectModel.updateProject(userId, projectId, undefined, createdTask._id);
+    return updateProject(userId, projectId, undefined, createdTask._id);
 };
 
-const updateProjectTask = () => {
-
-};
-
-const deleteProjectTask = async (userId, projectId, taskId) => {
-    const deletedTask = await ProjectModel.updateOne(
+const deleteProjectTask = (userId, projectId, taskId) => {
+    return ProjectModel.findOneAndUpdate(
         {
             _id: mongoose.Types.ObjectId(projectId),
             refUser: mongoose.Types.ObjectId(userId)
         },
         {
             $pull: {
-                refTasks: [taskId]
+                refTasks: mongoose.Types.ObjectId(taskId)
             }
         }
-    );
+    ).exec();
 };
+
+const deleteTask = (taskId) => {
+    return TasksModel.findByIdAndRemove(mongoose.Types.ObjectId(taskId)).exec();
+};
+
+const updateTask = (taskId, dataObject) => {
+    return TasksModel.findByIdAndUpdate(
+        taskId,
+        {
+            description: dataObject.description,
+            finishDate: dataObject.isFinished ? Date.now() : undefined
+        }
+    ).exec();
+};
+
 
 module.exports = {
     getUserProject,
@@ -112,6 +123,7 @@ module.exports = {
     deleteProject,
 
     addProjectTask,
-    updateProjectTask,
-    deleteProjectTask
+    deleteProjectTask,
+    deleteTask,
+    updateTask
 };

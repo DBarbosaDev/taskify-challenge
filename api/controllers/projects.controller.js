@@ -84,9 +84,92 @@ const deleteProject = async (req, res) => {
     }
 };
 
+const addProjectTask = async (req, res) => {
+    const userId = res.locals.userId;
+    const projectId = req.params.id;
+
+    try {
+        const isTaskAdded = await projectsService.addProjectTask(userId, projectId, req.body);
+
+        if (!isTaskAdded) {
+            return expressResponsesKit.sendError(res, { code: ERROR_CODES_CONSTANTS.PROJECT_NOT_FOUND });
+        }
+
+        return expressResponsesKit.sendSuccessWithoutContent(res);
+    }
+    catch (error) {
+        const stackTrace = {};
+        Error.captureStackTrace(stackTrace);
+
+        return expressResponsesKit.sendInternalServerError(
+            res, { stack: String(stackTrace.stack), message: error.message }
+        );
+    }
+};
+
+const deleteProjectTask = async (req, res) => {
+    const userId = res.locals.userId;
+    const projectId = req.params.id;
+    const taskId = req.params.taskId;
+
+    try {
+        const isProjectDeleted = await projectsService.deleteProjectTask(userId, projectId, taskId);
+
+        if (!isProjectDeleted) {
+            return expressResponsesKit.sendError(res, { code: ERROR_CODES_CONSTANTS.PROJECT_NOT_FOUND });
+        }
+
+        return expressResponsesKit.sendSuccessWithoutContent(res);
+    }
+    catch (error) {
+        const stackTrace = {};
+        Error.captureStackTrace(stackTrace);
+
+        if (ERROR_CODES_CONSTANTS[error.message]) {
+            return expressResponsesKit.sendError(res, { code: error.message });
+        }
+
+        return expressResponsesKit.sendInternalServerError(
+            res, { stack: String(stackTrace.stack), message: error.message }
+        );
+    }
+};
+
+const updateProjectTask = async (req, res) => {
+    const userId = res.locals.userId;
+    const projectId = req.params.id;
+    const taskId = req.params.taskId;
+
+    try {
+        const isProjectDeleted = await projectsService.updateProjectTask(userId, projectId, taskId, req.body);
+
+        if (!isProjectDeleted) {
+            return expressResponsesKit.sendError(res, { code: ERROR_CODES_CONSTANTS.PROJECT_NOT_FOUND });
+        }
+
+        return expressResponsesKit.sendSuccessWithoutContent(res);
+    }
+    catch (error) {
+        const stackTrace = {};
+        Error.captureStackTrace(stackTrace);
+
+        if (ERROR_CODES_CONSTANTS[error.message]) {
+            return expressResponsesKit.sendError(res, { code: error.message });
+        }
+
+        return expressResponsesKit.sendInternalServerError(
+            res, { stack: String(stackTrace.stack), message: error.message }
+        );
+    }
+};
+
 module.exports = {
     addProject,
     getProjects,
     updateProject,
-    deleteProject
+    deleteProject,
+
+    addProjectTask,
+    deleteProjectTask,
+    updateProjectTask
 };

@@ -1,3 +1,4 @@
+const { ERROR_CODES_CONSTANTS } = require('../../framework');
 const ProjectModel = require('../models/projects.model');
 
 const getProjectElementsFiltered = (project) => ({
@@ -34,9 +35,54 @@ const deleteProject = async (userId, projectId) => {
     return !!deletedProject;
 };
 
+const addProjectTask = async (userId, projectId, dataObject) => {
+    const { description } = dataObject;
+
+    const createdProject = await ProjectModel.addProjectTask(userId, projectId, { description });
+
+    return !!createdProject;
+};
+
+const deleteProjectTask = async (userId, projectId, taskId) => {
+    const project = await ProjectModel.deleteProjectTask(userId, projectId, taskId);
+
+    if (!project) {
+        return false;
+    }
+
+    const deletedTask = await ProjectModel.deleteTask(taskId);
+
+    if (!deletedTask) {
+        throw new Error(ERROR_CODES_CONSTANTS.TASK_NOT_FOUND);
+    }
+
+    return true;
+};
+
+const updateProjectTask = async (userId, projectId, taskId, dataObject) => {
+    const { description, isFinished } = dataObject;
+    const project = await ProjectModel.getUserProject(userId, projectId);
+
+    if (!project) {
+        return false;
+    }
+
+    const updatedTask = await ProjectModel.updateTask(taskId, { description, isFinished: !!isFinished });
+
+    if (!updatedTask) {
+        throw new Error(ERROR_CODES_CONSTANTS.TASK_NOT_FOUND);
+    }
+
+    return true;
+};
+
 module.exports = {
     addProject,
     getProjects,
     updateProject,
-    deleteProject
+    deleteProject,
+
+    addProjectTask,
+    deleteProjectTask,
+    updateProjectTask
 };
