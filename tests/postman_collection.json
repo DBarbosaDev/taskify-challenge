@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "677921ea-4417-402b-92c7-df7ee38dfc53",
+		"name": "Bolttech-Challenge-Taskify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User Regist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "asd222222222",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "cvx2asdasd",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test2@test2.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12312213\\2312-,.%&",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/regist",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"regist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"token\", jsonData?.data?.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test2@test2.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12312213\\2312-,.%&",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get Projects",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/myProjects",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"myProjects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Project",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "asdccc'\"\"\"\"\"\"\"\\\"\"\\\\2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/project",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}/api/project/606091e04bb8291f301dc91a",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"606091e04bb8291f301dc91a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "zzzabbbb",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/project/606091e04bb8291f301dc91a",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"606091e04bb8291f301dc91a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project Task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "description",
+									"value": "aaaaaaaaaaaaaaaaaaaa",
+									"type": "text"
+								},
+								{
+									"key": "isFinished",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/project/6061486efa089a3654cb0430/task/6061487efa089a3654cb0434",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"6061486efa089a3654cb0430",
+								"task",
+								"6061487efa089a3654cb0434"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Project Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "description",
+									"value": "asdccc'\"\"\"asd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/project/6061486efa089a3654cb0430/task",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"6061486efa089a3654cb0430",
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}/api/project/606148cbfa089a3654cb0437/task/6061487dfa089a3654cb0431",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"project",
+								"606148cbfa089a3654cb0437",
+								"task",
+								"6061487dfa089a3654cb0431"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
