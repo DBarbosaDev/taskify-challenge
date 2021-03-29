@@ -57,6 +57,23 @@ module.exports = {
             OBJECT_ID: {
                 ERROR_CODE: ERROR_CODES_CONSTANTS.INVALID_OBJECT_ID
             }
+        },
+        TASK_ID: {
+            REQUIRED: {
+                ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_ID_REQUIRED
+            },
+            OBJECT_ID: {
+                ERROR_CODE: ERROR_CODES_CONSTANTS.INVALID_OBJECT_ID
+            }
+        },
+        DESCRIPTION: {
+            REQUIRED: {
+                ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_DESCRIPTION_REQUIRED
+            },
+            MAX_SIZE: {
+                VALUE: 40,
+                ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_DESCRIPTION_MAX_SIZE_40_EXCEEDED
+            }
         }
     }
 };
