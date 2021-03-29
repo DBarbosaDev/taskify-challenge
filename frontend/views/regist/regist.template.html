@@ -1,0 +1,65 @@
+<div layout="column" layout-wrap layout-align="center center">
+    <h2 flex>Taskify</h2>
+
+    <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Authentication</span>
+            <span class="md-subhead">Regist</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        
+        <form name="registForm" ng-submit="RegistCtrl.onRegistFormSubmission()">
+            <div layout="row" layout-align="center center" layout-margin>
+                <md-progress-circular ng-if="RegistCtrl.waitingForResponse" md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <md-card-content ng-show="!RegistCtrl.waitingForResponse">
+                <div layout="column" flex="100">
+                    <md-input-container class="no-margin-left" flex="100" flex-gt-xs="50">
+                        <label>Name</label>
+                        <input type="text" required md-maxlength="25" name="name" ng-model="RegistCtrl.name">
+                        <div ng-messages="registForm.name.$error">
+                            <div ng-message-exp="['required', 'md-maxlength']">
+                                Your name is required and must be less than 25 characters.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="no-margin-left" flex="100" flex-gt-xs="50">
+                        <label>Surname</label>
+                        <input type="text" md-maxlength="25" name="surname" ng-model="RegistCtrl.surname">
+                        <div ng-messages="registForm.surname.$error" role="alert">
+                            <div ng-message-exp="['md-maxlength']">
+                                Your surname must be less than 25 characters.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="no-margin-left" flex="100" flex-gt-xs="50">
+                        <label>Email</label>
+                        <input type="email" required md-maxlength="40" md-pattern="/^.+@.+\..+$/" name="email" ng-model="RegistCtrl.email">
+                        <div ng-messages="registForm.email.$error" role="alert">
+                            <div ng-message-exp="['required', 'md-maxlength', 'pattern']">
+                                Your email must be less than 40 characters and look like an e-mail address.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="no-margin-left" flex="100" flex-gt-xs="50">
+                        <label>Password</label>
+                        <input type="password" required md-maxlength="40" name="password" ng-model="RegistCtrl.password">
+                        <div ng-messages="registForm.password.$error" role="alert">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="md-maxlength">The description must be less than 40 characters long.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="space-between center" ng-show="!RegistCtrl.waitingForResponse">
+                <md-button ui-sref="login" class="md-primary">Back to login</md-button>
+                <md-button type="submit" class="md-raised md-primary">Submit</md-button>
+            </md-card-actions>
+        </form>
+    </md-card>
+</div>
