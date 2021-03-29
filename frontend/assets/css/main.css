@@ -1,0 +1,14 @@
+.no-margin-left {
+    margin-left: 0 !important;
+}
+
+.fab-right-end {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+}
+
+.md-select-value span {
+    color: white;
+}
