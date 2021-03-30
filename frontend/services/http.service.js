@@ -7,14 +7,10 @@
         'Content-Type': 'application/json'
     };
 
-    const getUserSessionToken = (UtilsService) => {
-        const userSessionObject = UtilsService.getObjectFromStorage('userSessionObject') || {};
-
-        return userSessionObject.token || '';
-    };
-
-    function HttpService($http, UtilsService) {
-        $http.defaults.headers.common.Authorization = 'Bearer ' + getUserSessionToken(UtilsService);
+    function HttpService($http) {
+        this.setSessionToken = (token = '') => {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+        };
 
         this.post = (endpoint, body) => {
             const request = {

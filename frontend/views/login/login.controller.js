@@ -18,6 +18,7 @@
                 self.waitingForResponse = false;
 
                 UtilsService.addObjectToStorage('userSessionObject', details.data.data);
+                HttpService.setSessionToken(details.data.data.token);
                 UtilsService.sendToast('Sucesso');
 
                 $location.path('/projects');
