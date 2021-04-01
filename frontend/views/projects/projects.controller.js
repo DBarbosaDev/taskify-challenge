@@ -1,7 +1,7 @@
 (function () {
     angular.module('TaskifyApp').controller('ProjectsController', ProjectsController);
 
-    function ProjectsController(ProjectsService, UtilsService, $location, $mdDialog) {
+    function ProjectsController(ProjectsService, UtilsService, UserModel, ProjectModel, $location, $mdDialog) {
         const self = this;
         self.userFullName = null;
 
@@ -14,7 +14,9 @@
                 return;
             }
 
-            self.userFullName = `${userSessionObject.name} ${userSessionObject.surname}`;
+            const User = new UserModel(userSessionObject);
+
+            self.userFullName = User.getFullName();
         };
 
         self.addProject = (ev) => {

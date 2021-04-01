@@ -1,7 +1,7 @@
 (function () {
     angular.module('TaskifyApp').controller('LoginController', LoginController);
 
-    function LoginController(LoginService, UtilsService, HttpService, $location) {
+    function LoginController(LoginService, UtilsService, HttpService, $location, UserModel) {
         const self = this;
 
         self.waitingForResponse = false;
@@ -17,8 +17,10 @@
             }).then((details = {}) => {
                 self.waitingForResponse = false;
 
-                UtilsService.addObjectToStorage('userSessionObject', details.data.data);
-                HttpService.setSessionToken(details.data.data.token);
+                const User = new UserModel(details.data.data);
+
+                UtilsService.addObjectToStorage('userSessionObject', User);
+                HttpService.setSessionToken(User.token);
                 UtilsService.sendToast('Sucesso');
 
                 $location.path('/projects');
