@@ -1,11 +1,8 @@
-<div layout="row" layout-wrap ng-init="ProjectsCtrl.init()">
-    <md-toolbar class="md-primary">
+<div layout="column" layout-fill ng-init="ProjectsCtrl.init()">
+    <md-toolbar flex="auto">
         <div class="md-toolbar-tools">
             <h2>Taskify</h2>
             <span flex></span>
-            <state-selector flex="100">
-
-            </state-selector>
             <md-input-container md-no-float class="md-block">
                 <label>{{ProjectsCtrl.userFullName}}</label>
                 <md-select class="md-no-underline" ng-model="ProjectsCtrl.userMenuOptions">
@@ -14,12 +11,22 @@
             </md-input-container>
         </div>
     </md-toolbar>
-    <div flex="100" layout-margin>
-        <h1>Projects</h1>
-    </div>
 
+    <div flex="100" layout="row">
+        <div flex="25" layout-wrap layout-padding>
+            <div flex="100" layout="row">
+                <h2>Projects</h2>
+                <md-button class="md-fab md-primary" flex="none" ng-click="ProjectsCtrl.addProject()">
+                    <md-icon><span class="material-icons">add</span></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <div flex="75" layout-wrap layout-padding>
+            <h2>Tasks</h2>
+        </div>
+    </div>
     <div class="fab-right-end margin-20px" flex="none" layout-margin>
-        <md-button class="md-fab md-primary md-hue-2" aria-label="Project" ng-click="ProjectsCtrl.addProject()">
+        <md-button class="md-fab md-primary" aria-label="Project" ng-click="ProjectsCtrl.addProject()">
             <md-icon><span class="material-icons">add</span></md-icon>
         </md-button>
     </div>

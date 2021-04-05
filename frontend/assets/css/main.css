@@ -1,3 +1,10 @@
+:root {
+    --primary-color: #2A265F;
+    --secondary-color: #AAA8BF;
+    --light-grey-color: #DDDDDD;
+
+    --btn-border: 3px solid var(--primary-color)
+}
 .no-margin-left {
     margin-left: 0 !important;
 }
@@ -15,4 +22,23 @@
 
 md-checkbox .md-label {
     margin-top: 11px !important;
+}
+
+.md-fab:hover {
+    border: var(--btn-border) !important;
+    background-color: transparent !important;
+}
+
+.md-fab:hover md-icon {
+    color: var(--primary-color) !important;
+}
+
+.btn-primary-bordered {
+    border: var(--btn-border) !important;
+    background-color: transparent !important;
+}
+
+.md-toolbar-tools h1, .md-toolbar-tools h2, .md-toolbar-tools h3 {
+    font-size: xx-large;
+    font-weight: unset;
 }
