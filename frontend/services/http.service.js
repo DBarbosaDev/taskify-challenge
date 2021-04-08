@@ -7,9 +7,11 @@
         'Content-Type': 'application/json'
     };
 
-    function HttpService($http) {
+    function HttpService($http, UtilsService) {
         this.setSessionToken = (token = '') => {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+            const userSession = token || ((UtilsService.getObjectFromStorage('userSessionObject') || {}).token || '');
+
+            $http.defaults.headers.common.Authorization = 'Bearer ' + userSession;
         };
 
         this.post = (endpoint, body) => {

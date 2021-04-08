@@ -12,22 +12,53 @@
         </div>
     </md-toolbar>
 
-    <div flex="100" layout="row">
-        <div flex="25" layout-wrap layout-padding>
-            <div flex="100" layout="row">
+    <md-content flex="100" layout="row">
+        <md-content class="projects-container-bar" flex="25" layout-wrap>
+            <div flex="none" layout="row" layout-padding layout-align="space-between center">
                 <h2>Projects</h2>
-                <md-button class="md-fab md-primary" flex="none" ng-click="ProjectsCtrl.addProject()">
+                <md-button class="md-fab md-mini transparent-to-primary" flex="none" ng-click="ProjectsCtrl.addProject()">
                     <md-icon><span class="material-icons">add</span></md-icon>
                 </md-button>
             </div>
-        </div>
+            <div flex="100">
+                <div layout="row" layout-align="center center" layout-margin>
+                    <md-progress-circular ng-if="ProjectsCtrl.loadingBarsObject.projects" md-mode="indeterminate"></md-progress-circular>
+                </div>
+                <md-list ng-if="!ProjectsCtrl.loadingBarsObject.projects">
+                    <md-list-item  ng-class="'md-2-line';{ 'selected-project': project.id === ProjectsCtrl.selectedProject.id}" ng-repeat="project in ProjectsCtrl.projectsList" ng-click="ProjectsCtrl.selectProject(project)">
+                        <div flex="100" layout="row" layout-align="start center">
+                            <md-progress-circular class="progress-circular-indicator" flex="none" md-diameter="55" md-mode="determinate" value="100"></md-progress-circular>
+                            <md-progress-circular class="md-avatar" flex="none" md-diameter="55" md-mode="determinate" value="0"></md-progress-circular>
+                            <h5 class="progress-circular-text">0%</h5>
+                            <p>{{project.name}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </md-content>
         <div flex="75" layout-wrap layout-padding>
-            <h2>Tasks</h2>
+            <div layout="row" flex="100" layout-align="center center" ng-if="!ProjectsCtrl.selectedProject">
+                <h5>Selecione um projeto</h5>
+            </div>
+            <div layout="column" flex="100" layout-fill ng-if="ProjectsCtrl.selectedProject">
+                <div flex="none" layout="row" layout-align="space-between center">
+                    <h2>Tasks</h2>
+                    <md-button class="md-fab md-mini transparent-to-primary" flex="none" ng-click="">
+                        <md-icon><span class="material-icons">add</span></md-icon>
+                    </md-button>
+                </div>
+                <md-content flex="100">
+                    <div layout="row" layout-wrap>
+                        <div flex="100">
+                            <div class="task-container" layout="row" flex="100" layout-align="start center" layout-margin>
+                                <md-checkbox ng-model="data.cb2" aria-label="Checkbox 1">
+                                </md-checkbox>
+                                <p class="no-margin-left">A expressão Lorem ipsum em design visuais antes de utilizar conteúdo real. </p>
+                            </div>
+                        </div>
+                    </div>
+                </md-content>
+            </div>  
         </div>
-    </div>
-    <div class="fab-right-end margin-20px" flex="none" layout-margin>
-        <md-button class="md-fab md-primary" aria-label="Project" ng-click="ProjectsCtrl.addProject()">
-            <md-icon><span class="material-icons">add</span></md-icon>
-        </md-button>
-    </div>
+    </md-content>
 </div>

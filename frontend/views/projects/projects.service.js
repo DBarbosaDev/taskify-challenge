@@ -5,5 +5,9 @@
         this.createProject = (name) => {
             return HttpService.post('/project', { name });
         };
+
+        this.getMyProjects = () => {
+            return HttpService.get('/myProjects');
+        };
     }
 }());

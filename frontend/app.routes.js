@@ -20,7 +20,12 @@
                 url: '/projects',
                 templateUrl: './views/projects/projects.template.html',
                 controller: 'ProjectsController',
-                controllerAs: 'ProjectsCtrl'
+                controllerAs: 'ProjectsCtrl',
+                resolve: {
+                    setServiceSessionToken(HttpService) {
+                        HttpService.setSessionToken();
+                    }
+                }
             });
     }
 }());
