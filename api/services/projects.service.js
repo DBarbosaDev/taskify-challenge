@@ -35,6 +35,12 @@ const deleteProject = async (userId, projectId) => {
     return !!deletedProject;
 };
 
+const getProjectTasks = async (userId, projectId) => {
+    const project = await ProjectModel.getUserProject(userId, projectId);
+
+    return project;
+};
+
 const addProjectTask = async (userId, projectId, dataObject) => {
     const { description } = dataObject;
 
@@ -82,6 +88,7 @@ module.exports = {
     updateProject,
     deleteProject,
 
+    getProjectTasks,
     addProjectTask,
     deleteProjectTask,
     updateProjectTask

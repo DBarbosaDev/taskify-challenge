@@ -6,6 +6,8 @@ const { projectsController } = require('../controllers');
 const { projectsValidator } = require('../validators');
 
 router.get('/myProjects', projectsController.getProjects);
+router.get('/project/:id/tasks', projectsValidator.validateProjectIdParam(), projectsController.getProjectTasks);
+
 router.post('/project', projectsValidator.validateProjectParams(), projectsController.addProject);
 router.post('/project/:id/task',
     projectsValidator.validateProjectIdParam(),

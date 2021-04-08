@@ -114,7 +114,6 @@ const updateTask = (taskId, dataObject) => {
     ).exec();
 };
 
-
 module.exports = {
     getUserProject,
     getUserProjects,

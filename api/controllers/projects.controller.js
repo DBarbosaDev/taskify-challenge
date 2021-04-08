@@ -84,6 +84,29 @@ const deleteProject = async (req, res) => {
     }
 };
 
+const getProjectTasks = async (req, res) => {
+    const userId = res.locals.userId;
+    const projectId = req.params.id;
+
+    try {
+        const project = await projectsService.getProjectTasks(userId, projectId, req.body);
+
+        if (!project) {
+            return expressResponsesKit.sendError(res, { code: ERROR_CODES_CONSTANTS.PROJECT_NOT_FOUND });
+        }
+
+        return expressResponsesKit.sendSuccess(res, project.refTasks || []);
+    }
+    catch (error) {
+        const stackTrace = {};
+        Error.captureStackTrace(stackTrace);
+
+        return expressResponsesKit.sendInternalServerError(
+            res, { stack: String(stackTrace.stack), message: error.message }
+        );
+    }
+};
+
 const addProjectTask = async (req, res) => {
     const userId = res.locals.userId;
     const projectId = req.params.id;
@@ -169,6 +192,7 @@ module.exports = {
     updateProject,
     deleteProject,
 
+    getProjectTasks,
     addProjectTask,
     deleteProjectTask,
     updateProjectTask
