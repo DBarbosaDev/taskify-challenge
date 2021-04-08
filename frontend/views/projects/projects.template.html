@@ -25,13 +25,9 @@
                     <md-progress-circular ng-if="ProjectsCtrl.loadingBarsObject.projects" md-mode="indeterminate"></md-progress-circular>
                 </div>
                 <md-list ng-if="!ProjectsCtrl.loadingBarsObject.projects">
-                    <md-list-item  ng-class="'md-2-line';{ 'selected-project': project.id === ProjectsCtrl.selectedProject.id}" ng-repeat="project in ProjectsCtrl.projectsList" ng-click="ProjectsCtrl.selectProject(project)">
-                        <div flex="100" layout="row" layout-align="start center">
-                            <md-progress-circular class="progress-circular-indicator" flex="none" md-diameter="55" md-mode="determinate" value="100"></md-progress-circular>
-                            <md-progress-circular class="md-avatar" flex="none" md-diameter="55" md-mode="determinate" value="0"></md-progress-circular>
-                            <h5 class="progress-circular-text">0%</h5>
-                            <p>{{project.name}}</p>
-                        </div>
+                    <md-list-item  ng-class="'md-2-line';{ 'selected-project': project.id === ProjectsCtrl.selectedProject.id}" 
+                        ng-repeat="project in ProjectsCtrl.projectsList" ng-click="ProjectsCtrl.selectProject(project)" aria-label="Project">
+                        <ify-project data="project"></ify-project>
                     </md-list-item>
                 </md-list>
             </div>
@@ -50,11 +46,7 @@
                 <md-content flex="100">
                     <div layout="row" layout-wrap>
                         <div flex="100">
-                            <div class="task-container" layout="row" flex="100" layout-align="start center" layout-margin>
-                                <md-checkbox ng-model="data.cb2" aria-label="Checkbox 1">
-                                </md-checkbox>
-                                <p class="no-margin-left">A expressão Lorem ipsum em design visuais antes de utilizar conteúdo real. </p>
-                            </div>
+                            <ify-task data="{}"></ify-task>
                         </div>
                     </div>
                 </md-content>
