@@ -1,6 +1,28 @@
-<div flex="100" layout="row" layout-align="start center">
-    <md-progress-circular class="progress-circular-indicator" flex="none" md-diameter="55" md-mode="determinate" value="100"></md-progress-circular>
-    <md-progress-circular class="md-avatar" flex="none" md-diameter="55" md-mode="determinate" value="0"></md-progress-circular>
-    <h5 class="progress-circular-text">0%</h5>
-    <p>{{data.name}}</p>
+<div flex="100" layout="row" layout-align="space-between center">
+    <div flex="100" layout="row" layout-align="start center">
+        <md-progress-circular class="progress-circular-indicator" flex="none" md-diameter="55" md-mode="determinate" value="100"></md-progress-circular>
+        <md-progress-circular class="md-avatar" flex="none" md-diameter="55" md-mode="determinate" value="0"></md-progress-circular>
+        <h5 class="progress-circular-text">0%</h5>
+        <p>{{data.name}}</p>
+    </div>
+    <div flex="none" layout="row" layout-align="center center">
+        <md-menu>
+            <md-button aria-label="Action Menu" class="md-icon-button"
+                       ng-click="$mdMenu.open($event)">
+                <md-icon md-icon md-menu-origin>
+                    <span class="material-icons-outlined">more_vert</span>
+                </md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-click="">
+                    Edit
+                </md-button>
+                <md-button ng-click="">
+                    Delete
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+    </div>
 </div>

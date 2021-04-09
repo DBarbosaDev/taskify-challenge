@@ -91,6 +91,25 @@
                 });
         };
 
+        self.orderTasksListByNonFinished = () => {
+            self.tasksList = self.tasksList.sort((a, b) => a.isFinished - b.isFinished);
+        };
+
+        self.onTaskToogle = (taskData) => {
+            self.orderTasksListByNonFinished();
+
+            taskData.isDisabled = true;
+
+            ProjectsService.updateProjectTask(self.selectedProject.id, taskData.id, { isFinished: taskData.isFinished })
+                .then(() => {
+                    taskData.isDisabled = false;
+                })
+                .catch(() => {
+                    taskData.isDisabled = false;
+                    taskData.isFinished = false;
+                });
+        };
+
         self.selectProject = (project) => {
             self.selectedProject = project;
 
@@ -102,6 +121,8 @@
                 self.tasksList = tasks.map((el) => {
                     return new TaskModel(el);
                 });
+
+                self.orderTasksListByNonFinished();
 
                 self.onLoading.tasks = false;
             }).catch((error) => {

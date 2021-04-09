@@ -25,9 +25,9 @@
                     <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 </div>
                 <md-list ng-if="!ProjectsCtrl.onLoading.projects">
-                    <md-list-item  ng-class="'md-2-line';{ 'selected-project': project.id === ProjectsCtrl.selectedProject.id}" 
+                    <md-list-item ng-class="'md-2-line';{ 'selected-project': project.id === ProjectsCtrl.selectedProject.id}" 
                         ng-repeat="project in ProjectsCtrl.projectsList" ng-click="ProjectsCtrl.selectProject(project)" aria-label="Project">
-                        <ify-project data="project"></ify-project>
+                        <ify-project flex="100" data="project"></ify-project>
                     </md-list-item>
                 </md-list>
             </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div layout="row" layout-wrap ng-if="!ProjectsCtrl.onLoading.tasks">
                         <div flex="100">
-                            <ify-task ng-repeat="task in ProjectsCtrl.tasksList" data="task"></ify-task>
+                            <ify-task ng-repeat="task in ProjectsCtrl.tasksList" data="task" on-toogle-callback="ProjectsCtrl.onTaskToogle"></ify-task>
                         </div>
                     </div>
                 </md-content>

@@ -7,6 +7,7 @@
             this.description = data.description;
             this.creationDate = data.creationDate;
             this.isFinished = !!data.finishDate;
+            this.isDisabled = false;
             this.finishDate = data.finishDate;
         };
     }

@@ -17,5 +17,9 @@
         this.createProjectTask = (projectId, description) => {
             return HttpService.post(`/project/${projectId}/task`, { description });
         };
+
+        this.updateProjectTask = (projectId, taskId, bodyData) => {
+            return HttpService.put(`/project/${projectId}/task/${taskId}`, bodyData);
+        };
     }
 }());

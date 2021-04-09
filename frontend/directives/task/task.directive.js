@@ -5,7 +5,8 @@
             link: ifyProjectContainer,
             restrict: 'E',
             scope: {
-                data: '='
+                data: '=',
+                onToogleCallback: '='
             }
         };
     });

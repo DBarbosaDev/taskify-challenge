@@ -11,6 +11,11 @@
     margin-left: 0 !important;
 }
 
+.no-margin-t-b {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .margin-l-15 {
     margin-left: 15px;
 }
@@ -162,3 +167,6 @@ md-list-item p {
     border-radius: 15px;
 }
 
+.task-finished {
+    color: var(--secondary-color) !important;
+}

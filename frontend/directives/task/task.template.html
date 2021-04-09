@@ -1,5 +1,30 @@
 <div class="task-container" flex="100" layout="row" layout-align="start center" layout-margin>
-    <md-checkbox ng-model="data.isFinished" aria-label="Task Checkbox">
-    </md-checkbox>
-    <p class="no-margin-left">{{data.description}}</p>
+    <div class="no-margin-t-b" flex="100" layout="row" layout-align="start center" layout-margin>
+        <md-checkbox ng-model="data.isFinished" ng-change="onToogleCallback(data)" ng-disabled="data.isDisabled" aria-label="Task Checkbox">
+        </md-checkbox>
+        <p ng-class="'no-margin-left'; { 'task-finished': data.isFinished }">{{data.description}}</p>
+    </div>
+    <div flex="none" layout="row" layout-align="center center" ng-if="data.isDisabled">
+        <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+    </div>
+    <div flex="none" layout="row" layout-align="center center" ng-if="!data.isDisabled">
+        <md-menu>
+            <md-button aria-label="Action Menu" class="md-icon-button"
+                       ng-click="$mdMenu.open($event)">
+                <md-icon md-icon md-menu-origin>
+                    <span class="material-icons-outlined">more_vert</span>
+                </md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-click="">
+                    Edit
+                </md-button>
+                <md-button ng-click="">
+                    Delete
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+    </div>
 </div>
