@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const helpers = require('../helpers');
 
 const TasksModelSchema = new mongoose.Schema({
     description: {
@@ -117,13 +118,14 @@ const deleteTask = (taskId) => {
 };
 
 const updateTask = (taskId, dataObject) => {
-    return TasksModel.findByIdAndUpdate(
-        taskId,
-        {
-            description: dataObject.description,
-            finishDate: dataObject.isFinished ? Date.now() : undefined
-        }
-    ).exec();
+    const data = {
+        ...dataObject,
+        finishDate: dataObject.isFinished ? Date.now() : undefined
+    };
+
+    helpers.removeUndefinedFields(data);
+
+    return TasksModel.findByIdAndUpdate(taskId, data).exec();
 };
 
 module.exports = {
