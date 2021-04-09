@@ -112,13 +112,13 @@ const addProjectTask = async (req, res) => {
     const projectId = req.params.id;
 
     try {
-        const isTaskAdded = await projectsService.addProjectTask(userId, projectId, req.body);
+        const task = await projectsService.addProjectTask(userId, projectId, req.body);
 
-        if (!isTaskAdded) {
+        if (!task) {
             return expressResponsesKit.sendError(res, { code: ERROR_CODES_CONSTANTS.PROJECT_NOT_FOUND });
         }
 
-        return expressResponsesKit.sendSuccessWithoutContent(res);
+        return expressResponsesKit.sendSuccess(res, task);
     }
     catch (error) {
         const stackTrace = {};

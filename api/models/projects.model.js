@@ -81,9 +81,21 @@ const deleteProject = (userId, projectId) => {
 };
 
 const addProjectTask = async (userId, projectId, dataObject = {}) => {
-    const createdTask = (await TasksModel.create(dataObject)) || {};
+    const session = await TasksModel.startSession();
+    session.startTransaction();
 
-    return updateProject(userId, projectId, undefined, createdTask._id);
+    const createdTask = await TasksModel.create([dataObject], { session });
+
+    if (await updateProject(userId, projectId, undefined, createdTask[0]._id)) {
+        await session.commitTransaction();
+
+        return createdTask[0];
+    }
+
+    await session.abortTransaction();
+    await session.endSession();
+
+    return null;
 };
 
 const deleteProjectTask = (userId, projectId, taskId) => {

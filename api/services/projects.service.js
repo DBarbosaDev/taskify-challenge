@@ -44,9 +44,9 @@ const getProjectTasks = async (userId, projectId) => {
 const addProjectTask = async (userId, projectId, dataObject) => {
     const { description } = dataObject;
 
-    const createdProject = await ProjectModel.addProjectTask(userId, projectId, { description });
+    const createdTask = await ProjectModel.addProjectTask(userId, projectId, { description });
 
-    return !!createdProject;
+    return createdTask;
 };
 
 const deleteProjectTask = async (userId, projectId, taskId) => {

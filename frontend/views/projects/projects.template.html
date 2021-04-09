@@ -21,10 +21,10 @@
                 </md-button>
             </div>
             <div flex="100">
-                <div layout="row" layout-align="center center" layout-margin>
-                    <md-progress-circular ng-if="ProjectsCtrl.loadingBarsObject.projects" md-mode="indeterminate"></md-progress-circular>
+                <div layout="row" layout-align="center center" ng-if="ProjectsCtrl.onLoading.projects" layout-margin>
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                 </div>
-                <md-list ng-if="!ProjectsCtrl.loadingBarsObject.projects">
+                <md-list ng-if="!ProjectsCtrl.onLoading.projects">
                     <md-list-item  ng-class="'md-2-line';{ 'selected-project': project.id === ProjectsCtrl.selectedProject.id}" 
                         ng-repeat="project in ProjectsCtrl.projectsList" ng-click="ProjectsCtrl.selectProject(project)" aria-label="Project">
                         <ify-project data="project"></ify-project>
@@ -39,14 +39,17 @@
             <div layout="column" flex="100" layout-fill ng-if="ProjectsCtrl.selectedProject">
                 <div flex="none" layout="row" layout-align="space-between center">
                     <h2>Tasks</h2>
-                    <md-button class="md-fab md-mini transparent-to-primary" flex="none" ng-click="">
+                    <md-button class="md-fab md-mini transparent-to-primary" flex="none" ng-click="ProjectsCtrl.addTask()">
                         <md-icon><span class="material-icons">add</span></md-icon>
                     </md-button>
                 </div>
                 <md-content flex="100">
-                    <div layout="row" layout-wrap>
+                    <div layout="row" layout-align="center center" layout-margin ng-if="ProjectsCtrl.onLoading.tasks">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+                    <div layout="row" layout-wrap ng-if="!ProjectsCtrl.onLoading.tasks">
                         <div flex="100">
-                            <ify-task data="{}"></ify-task>
+                            <ify-task ng-repeat="task in ProjectsCtrl.tasksList" data="task"></ify-task>
                         </div>
                     </div>
                 </md-content>

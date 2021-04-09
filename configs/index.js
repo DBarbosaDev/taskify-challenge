@@ -4,7 +4,7 @@ require('dotenv').config();
 
 module.exports = {
     SERVER_PORT: process.env.SERVER_PORT || 8080,
-    MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/taskifyDB',
+    MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/taskifyDB?retryWrites=false',
     JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY || bcrypt.genSaltSync(20),
     RUNNING_MODE: process.env.RUNNING_MODE || 'production',
 

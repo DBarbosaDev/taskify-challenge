@@ -9,5 +9,13 @@
         this.getMyProjects = () => {
             return HttpService.get('/myProjects');
         };
+
+        this.getProjectTasks = (projectId) => {
+            return HttpService.get(`/project/${projectId}/tasks`);
+        };
+
+        this.createProjectTask = (projectId, description) => {
+            return HttpService.post(`/project/${projectId}/task`, { description });
+        };
     }
 }());

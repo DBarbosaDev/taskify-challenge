@@ -71,8 +71,8 @@ module.exports = {
                 ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_DESCRIPTION_REQUIRED
             },
             MAX_SIZE: {
-                VALUE: 40,
-                ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_DESCRIPTION_MAX_SIZE_40_EXCEEDED
+                VALUE: 3000,
+                ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_DESCRIPTION_MAX_SIZE_3000_EXCEEDED
             }
         }
     }
