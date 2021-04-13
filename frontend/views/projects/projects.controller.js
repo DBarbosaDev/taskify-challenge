@@ -85,7 +85,9 @@
                     return ProjectsService.createProjectTask((self.selectedProject || {}).id, description)
                         .then((result) => {
                             self.tasksList.push(new TaskModel(result.data.data));
-                            UtilsService.sendToast('Task Criada!');
+                            self.selectedProject.totalTasks += 1;
+
+                            UtilsService.sendToast('Tarefa Criada!');
                         })
                         .catch(() => UtilsService.sendToast('Error on task creation'));
                 });
@@ -103,6 +105,8 @@
             ProjectsService.updateProjectTask(self.selectedProject.id, taskData.id, { isFinished: taskData.isFinished })
                 .then(() => {
                     taskData.isDisabled = false;
+
+                    self.selectedProject.totalFinishedTasks += taskData.isFinished ? 1 : -1;
                 })
                 .catch(() => {
                     taskData.isDisabled = false;

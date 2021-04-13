@@ -89,13 +89,13 @@ const getProjectTasks = async (req, res) => {
     const projectId = req.params.id;
 
     try {
-        const project = await projectsService.getProjectTasks(userId, projectId, req.body);
+        const projectTasks = await projectsService.getProjectTasks(userId, projectId, req.body);
 
-        if (!project) {
+        if (!projectTasks) {
             return expressResponsesKit.sendError(res, { code: ERROR_CODES_CONSTANTS.PROJECT_NOT_FOUND });
         }
 
-        return expressResponsesKit.sendSuccess(res, project.refTasks || []);
+        return expressResponsesKit.sendSuccess(res, projectTasks || []);
     }
     catch (error) {
         const stackTrace = {};

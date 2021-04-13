@@ -1,10 +1,11 @@
 const { ERROR_CODES_CONSTANTS } = require('../../framework');
 const ProjectModel = require('../models/projects.model');
 
-const getProjectElementsFiltered = (project) => ({
+const getProjectDetails = (project) => ({
     _id: project._id,
     name: project.name,
-    refTasks: project.refTasks
+    totalTasks: project.refTasks.length,
+    totalFinishedTasks: project.refTasks.filter((task) => task.finishDate).length
 });
 
 const addProject = async (userId, dataObject) => {
@@ -12,13 +13,13 @@ const addProject = async (userId, dataObject) => {
 
     const createdProject = await ProjectModel.addProject(userId, { name });
 
-    return getProjectElementsFiltered(createdProject);
+    return getProjectDetails(createdProject);
 };
 
 const getProjects = async (userId) => {
     const projectsList = await ProjectModel.getUserProjects(userId);
 
-    return projectsList.map((project) => getProjectElementsFiltered(project));
+    return projectsList.map((project) => getProjectDetails(project));
 };
 
 const updateProject = async (userId, projectId, dataObject) => {
@@ -38,7 +39,7 @@ const deleteProject = async (userId, projectId) => {
 const getProjectTasks = async (userId, projectId) => {
     const project = await ProjectModel.getUserProject(userId, projectId);
 
-    return project;
+    return project ? project.refTasks : null;
 };
 
 const addProjectTask = async (userId, projectId, dataObject) => {
