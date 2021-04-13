@@ -40,8 +40,8 @@ module.exports = {
         },
         PROJECT_NAME: {
             MAX_SIZE: {
-                VALUE: 40,
-                ERROR_CODE: ERROR_CODES_CONSTANTS.PROJECT_NAME_MAX_SIZE_40_EXCEEDED
+                VALUE: 1024,
+                ERROR_CODE: ERROR_CODES_CONSTANTS.PROJECT_NAME_MAX_SIZE_1024_EXCEEDED
             },
             INVALID: {
                 ERROR_CODE: ERROR_CODES_CONSTANTS.INVALID_PROJECT_NAME_STRING
@@ -71,8 +71,8 @@ module.exports = {
                 ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_DESCRIPTION_REQUIRED
             },
             MAX_SIZE: {
-                VALUE: 3000,
-                ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_DESCRIPTION_MAX_SIZE_3000_EXCEEDED
+                VALUE: 2068,
+                ERROR_CODE: ERROR_CODES_CONSTANTS.TASK_DESCRIPTION_MAX_SIZE_2068_EXCEEDED
             }
         }
     }

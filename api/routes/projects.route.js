@@ -22,7 +22,6 @@ router.put('/project/:id',
 router.put('/project/:id/task/:taskId',
     projectsValidator.validateProjectIdParam(),
     projectsValidator.validateTaskIdParam(),
-    projectsValidator.validateTaskParams(),
     projectsController.updateProjectTask);
 
 router.delete('/project/:id', projectsValidator.validateProjectIdParam(), projectsController.deleteProject);

@@ -120,7 +120,7 @@ const deleteTask = (taskId) => {
 const updateTask = (taskId, dataObject) => {
     const data = {
         ...dataObject,
-        finishDate: dataObject.isFinished ? Date.now() : undefined
+        finishDate: dataObject.isFinished ? Date.now() : null
     };
 
     helpers.removeUndefinedFields(data);
