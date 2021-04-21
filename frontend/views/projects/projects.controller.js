@@ -102,16 +102,50 @@
 
             taskData.isDisabled = true;
 
-            ProjectsService.updateProjectTask(self.selectedProject.id, taskData.id, { isFinished: taskData.isFinished })
+            ProjectsService.toggleProjectTask(self.selectedProject.id, taskData.id, { isFinished: taskData.isFinished })
                 .then(() => {
-                    taskData.isDisabled = false;
-
                     self.selectedProject.totalFinishedTasks += taskData.isFinished ? 1 : -1;
                 })
                 .catch(() => {
-                    taskData.isDisabled = false;
                     taskData.isFinished = false;
+                })
+                .finally(() => {
+                    taskData.isDisabled = false;
                 });
+        };
+
+        self.onEditTask = (taskData) => {
+            taskData.isDisabled = true;
+
+            ProjectsService.updateProjectTask(
+                self.selectedProject.id,
+                taskData.id,
+                { isFinished: taskData.isFinished, description: taskData.description }
+            ).then(() => { })
+                .catch(() => { })
+                .finally(() => {
+                    taskData.isDisabled = false;
+                });
+        };
+
+        self.onDeleteTask = (ev, taskData) => {
+            const confirm = $mdDialog.confirm()
+                .title('Deseja mesmo eliminar a tarefa?')
+                .ariaLabel('Confirm')
+                .targetEvent(ev)
+                .ok('Sim')
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm).then(() => {
+                ProjectsService.deleteProjectTask(self.selectedProject.id, taskData.id)
+                    .then(() => {
+                        self.tasksList = self.tasksList.filter((task) => task.id !== taskData.id);
+
+                        self.selectedProject.totalFinishedTasks -= taskData.isFinished ? 1 : 0;
+                        self.selectedProject.totalTasks -= 1;
+                    })
+                    .catch(() => {});
+            }, () => {});
         };
 
         self.selectProject = (project) => {

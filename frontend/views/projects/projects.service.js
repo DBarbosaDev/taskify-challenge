@@ -21,5 +21,13 @@
         this.updateProjectTask = (projectId, taskId, bodyData) => {
             return HttpService.put(`/project/${projectId}/task/${taskId}`, bodyData);
         };
+
+        this.toggleProjectTask = (projectId, taskId, bodyData) => {
+            return HttpService.put(`/project/${projectId}/task/${taskId}/toggle`, bodyData);
+        };
+
+        this.deleteProjectTask = (projectId, taskId) => {
+            return HttpService.delete(`/project/${projectId}/task/${taskId}`);
+        };
     }
 }());
