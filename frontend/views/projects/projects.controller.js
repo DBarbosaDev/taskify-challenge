@@ -148,6 +148,34 @@
             }, () => {});
         };
 
+        self.onEditProject = (projectData) => {
+            ProjectsService.updateProject(projectData.id, { name: projectData.name })
+                .then(() => { })
+                .catch(() => { });
+        };
+
+        self.onDeleteProject = (ev, projectData) => {
+            const confirm = $mdDialog.confirm()
+                .title('Deseja mesmo eliminar o projeto?')
+                .ariaLabel('Confirm')
+                .targetEvent(ev)
+                .ok('Sim')
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm).then(() => {
+                ProjectsService.deleteProject(projectData.id)
+                    .then(() => {
+                        self.projectsList = self.projectsList.filter((project) => project.id !== projectData.id);
+
+                        if (projectData.id === self.selectedProject.id) {
+                            self.selectedProject = null;
+                            self.tasksList = [];
+                        }
+                    })
+                    .catch(() => {});
+            }, () => {});
+        };
+
         self.selectProject = (project) => {
             self.selectedProject = project;
 

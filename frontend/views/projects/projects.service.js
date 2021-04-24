@@ -10,6 +10,14 @@
             return HttpService.get('/myProjects');
         };
 
+        this.updateProject = (projectId, bodyData) => {
+            return HttpService.put(`/project/${projectId}`, bodyData);
+        };
+
+        this.deleteProject = (projectId) => {
+            return HttpService.delete(`/project/${projectId}`);
+        };
+
         this.getProjectTasks = (projectId) => {
             return HttpService.get(`/project/${projectId}/tasks`);
         };
