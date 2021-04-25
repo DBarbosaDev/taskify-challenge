@@ -11,6 +11,10 @@
     margin-left: 0 !important;
 }
 
+.no-martin-t {
+    margin-top: 0;
+}
+
 .no-margin-t-b {
     margin-top: 0;
     margin-bottom: 0;
@@ -29,6 +33,10 @@
     right: 0;
     bottom: 0;
     margin: 20px;
+}
+
+.primary-bg-color {
+    background-color: var(--light-grey-color);
 }
 
 .projects-container-bar {

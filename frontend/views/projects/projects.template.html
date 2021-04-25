@@ -12,8 +12,40 @@
         </div>
     </md-toolbar>
 
+    <div flex="none" layout-align="center center">
+        <md-button class="md-fab md-mini transparent-to-primary" hide-gt-sm ng-click="ProjectsCtrl.toogleProjectsSideBar('projectsSidebar')">
+            <md-icon><span class="material-icons-outlined">menu</span></md-icon>
+        </md-button>
+    </div>
+
     <md-content flex="100" layout="row">
-        <md-content class="projects-container-bar" flex="25" layout-wrap>
+        <md-sidenav class="md-sidenav-left projects-container-bar" flex="100" md-component-id="projectsSidebar"
+                  md-whiteframe="4">
+            <md-content class="primary-bg-color">
+                <div flex="none" layout="row" layout-padding layout-align="space-between center">
+                    <h2>Projects</h2>
+                    <md-button class="md-fab md-mini transparent-to-primary" flex="none" ng-click="ProjectsCtrl.addProject()">
+                        <md-icon><span class="material-icons">add</span></md-icon>
+                    </md-button>
+                </div>
+                <div flex="100">
+                    <div layout="row" layout-align="center center" ng-if="ProjectsCtrl.onLoading.projects" layout-margin>
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+                    <md-list ng-if="!ProjectsCtrl.onLoading.projects">
+                        <md-list-item ng-class="'md-2-line';{ 'selected-project': project.id === ProjectsCtrl.selectedProject.id}" 
+                            ng-repeat="project in ProjectsCtrl.projectsList" ng-click="ProjectsCtrl.selectProject(project)" aria-label="Project">
+                            <ify-project flex="100" data="project"
+                                on-edit-callback="ProjectsCtrl.onEditProject"
+                                on-delete-callback="ProjectsCtrl.onDeleteProject">
+                            </ify-project>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </md-content>
+        </md-sidenav>
+        
+        <md-content class="projects-container-bar" flex="25" layout-wrap hide show-gt-sm>
             <div flex="none" layout="row" layout-padding layout-align="space-between center">
                 <h2>Projects</h2>
                 <md-button class="md-fab md-mini transparent-to-primary" flex="none" ng-click="ProjectsCtrl.addProject()">
@@ -35,7 +67,8 @@
                 </md-list>
             </div>
         </md-content>
-        <div flex="75" layout-wrap layout-padding>
+
+        <div flex="100" flex-gt-sm="75" layout-wrap layout-padding>
             <div layout="row" flex="100" layout-align="center center" ng-if="!ProjectsCtrl.selectedProject">
                 <h5>Selecione um projeto</h5>
             </div>

@@ -1,7 +1,7 @@
 (function () {
     angular.module('TaskifyApp').controller('ProjectsController', ProjectsController);
 
-    function ProjectsController(ProjectsService, UtilsService, UserModel, ProjectModel, TaskModel, $location, $mdDialog) {
+    function ProjectsController(ProjectsService, UtilsService, UserModel, ProjectModel, TaskModel, $location, $mdDialog, $mdSidenav) {
         const self = this;
         self.userFullName = null;
         self.selectedProject = null;
@@ -196,6 +196,10 @@
 
                 self.onLoading.tasks = false;
             });
+        };
+
+        self.toogleProjectsSideBar = (componentId) => {
+            return $mdSidenav(componentId).toggle();
         };
     }
 }());
