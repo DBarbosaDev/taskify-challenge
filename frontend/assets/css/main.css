@@ -1,0 +1,185 @@
+:root {
+    --primary-color: #2A265F;
+    --secondary-color: #AAA8BF;
+    --grey-color: #DDDDDD;
+    --light-grey-color: #EEEEEE;
+
+    --btn-border: 3px solid var(--primary-color)
+}
+
+.no-margin-left {
+    margin-left: 0 !important;
+}
+
+.no-martin-t {
+    margin-top: 0;
+}
+
+.no-margin-t-b {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.margin-l-15 {
+    margin-left: 15px;
+}
+
+.margin-r-15 {
+    margin-right: 15px;
+}
+
+.fab-right-end {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+}
+
+.primary-bg-color {
+    background-color: var(--light-grey-color);
+}
+
+.projects-container-bar {
+    background-color: var(--light-grey-color);
+}
+
+md-checkbox {
+    min-width: 37px;
+    min-height: 42px;
+}
+
+md-checkbox .md-icon {
+    width: 31px !important;
+    height: 31px !important;
+    border-radius: 100% !important;
+    border-width: 3px !important;
+}
+
+md-checkbox.md-checked .md-icon {
+    background-color: transparent !important;
+    border-color: var(--primary-color) !important;
+    color: black;
+}
+
+md-checkbox.md-checked .md-icon:after {
+    left: 9px !important;
+    top: 4px !important;
+    width: 7px !important;
+    height: 15px !important;
+    border-width: 3px !important;
+    border-color: var(--primary-color) !important;
+}
+
+md-checkbox .md-container {
+    width: 31px;
+    height: 31px;
+}
+
+md-checkbox .md-container .md-ripple-container {
+    left: -15px;
+    top: -15px;
+    right: -18px;
+    bottom: -18px;
+}
+
+
+.md-select-value span {
+    color: white;
+}
+
+.md-button.md-fab {
+    transition: all .2s cubic-bezier(.55,0,.55,.2) !important;
+}
+
+.bordered {
+    border: var(--btn-border) !important;
+    background-color: transparent !important;
+    color: var(--primary-color) !important;
+}
+
+.bordered md-icon {
+    color: var(--primary-color) !important;
+}
+
+.rounded {
+    border-radius: 40px;
+}
+
+
+.md-fab.bordered:hover {
+    border: 0 !important;
+    background-color: var(--primary-color) !important;
+}
+
+.md-fab.bordered:hover md-icon {
+    color: #FFFFFF !important;
+}
+
+.md-toolbar-tools h1, .md-toolbar-tools h2, .md-toolbar-tools h3 {
+    font-size: xx-large;
+    font-weight: unset;
+}
+
+md-list-item p {
+    line-height: normal;
+}
+
+.transparent-to-primary {
+    color: var(--primary-color) !important;
+    background-color: transparent !important;
+}
+
+.transparent-to-primary md-icon{
+    color: var(--primary-color) !important;
+}
+
+.transparent-to-primary:hover {
+    background-color: var(--primary-color) !important;
+}
+
+.transparent-to-primary:hover md-icon{
+    color: #FFFFFF !important;
+}
+
+.btn-primary-bordered {
+    border: var(--btn-border) !important;
+    background-color: transparent !important;
+}
+
+
+.projects-container-bar {
+    background-color: var(--light-grey-color);
+}
+
+.progress-circular-text {
+    color: var(--primary-color);
+    position: absolute;
+    text-align: center;
+    width: 55px;
+}
+
+.progress-circular-indicator {
+    position: absolute;
+}
+
+.progress-circular-indicator path {
+    stroke: var(--secondary-color);
+}
+
+.selected-project {
+    background-color: #FFFFFF;
+}
+
+.task-container {
+    background-color: var(--light-grey-color);
+    border-radius: 15px;
+}
+
+.content-box {
+    padding: 10px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 2px 1px -1px rgb(0 0 0 / 12%);
+}
+
+.task-finished {
+    color: var(--secondary-color) !important;
+}

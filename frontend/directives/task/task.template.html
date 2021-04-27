@@ -1,0 +1,56 @@
+<div class="task-container" flex="100" layout="row" layout-align="start center" layout-margin>
+    <div class="no-margin-t-b" flex="100" layout="row" layout-align="start center" layout-margin>
+        <md-checkbox ng-model="data.isFinished" ng-change="onToogleCallback(data)" ng-disabled="data.isDisabled" aria-label="Task Checkbox">
+        </md-checkbox>
+        <p ng-class="'no-margin-left'; { 'task-finished': data.isFinished }" ng-if="!isEditing">{{data.description}}</p>
+        <md-input-container flex="100" md-no-float ng-if="isEditing">
+            <input ng-model="data.description" placeholder="Task name" aria-label="Task name">
+        </md-input-container>
+    </div>
+    <div flex="none" layout="row" layout-align="center center" ng-if="data.isDisabled">
+        <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+    </div>
+    <div flex="none" layout="row" layout-align="center center" ng-if="!data.isDisabled">
+        <div ng-if="isEditing">
+            <md-button class="md-icon-button" ng-click="onEdit()">
+                <md-icon md-icon md-menu-origin>
+                    <span class="material-icons-outlined">check</span>
+                </md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="changeEditStatus()">
+                <md-icon md-icon md-menu-origin>
+                    <span class="material-icons-outlined">cancel</span>
+                </md-icon>
+            </md-button>
+        </div>
+        <md-menu ng-if="!isEditing">
+            <md-button class="md-icon-button" ng-click="$mdMenu.open($event)">
+                <md-icon md-icon md-menu-origin>
+                    <span class="material-icons-outlined">more_vert</span>
+                </md-icon>
+            </md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <md-button ng-click="changeEditStatus()">
+                        <span md-menu-align-target>
+                            <md-icon md-icon md-menu-origin>
+                                <span class="material-icons-outlined">edit</span>
+                            </md-icon>
+                        </span>
+                        Editar
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="onDeleteCallback($event, data)">
+                        <span md-menu-align-target>
+                            <md-icon md-icon md-menu-origin>
+                                <span class="material-icons-outlined">delete</span>
+                            </md-icon>
+                        </span>
+                        Eliminar
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</div>
