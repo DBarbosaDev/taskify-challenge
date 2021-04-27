@@ -21,12 +21,12 @@
 
                 UtilsService.addObjectToStorage('userSessionObject', User);
                 HttpService.setSessionToken(User.token);
-                UtilsService.sendToast('Sucesso');
+                UtilsService.sendToast('Success!');
 
                 $location.path('/projects');
             }).catch((err) => {
                 self.waitingForResponse = false;
-                UtilsService.sendToast('Error On login');
+                UtilsService.sendToast('Login error');
             });
         };
     }

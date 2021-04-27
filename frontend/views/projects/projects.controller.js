@@ -61,7 +61,7 @@
                     return ProjectsService.createProject(name)
                         .then((result) => {
                             self.projectsList.push(new ProjectModel(result.data.data));
-                            UtilsService.sendToast('Projeto Criado!');
+                            UtilsService.sendToast('Successfully created!');
                         })
                         .catch(() => UtilsService.sendToast('Error on project creation'));
                 });
@@ -87,7 +87,7 @@
                             self.tasksList.push(new TaskModel(result.data.data));
                             self.selectedProject.totalTasks += 1;
 
-                            UtilsService.sendToast('Tarefa Criada!');
+                            UtilsService.sendToast('Successfully created!');
                         })
                         .catch(() => UtilsService.sendToast('Error on task creation'));
                 });
@@ -130,10 +130,10 @@
 
         self.onDeleteTask = (ev, taskData) => {
             const confirm = $mdDialog.confirm()
-                .title('Deseja mesmo eliminar a tarefa?')
+                .title('Do you really want to delete the task?')
                 .ariaLabel('Confirm')
                 .targetEvent(ev)
-                .ok('Sim')
+                .ok('Yes')
                 .cancel('Cancel');
 
             $mdDialog.show(confirm).then(() => {
@@ -156,10 +156,10 @@
 
         self.onDeleteProject = (ev, projectData) => {
             const confirm = $mdDialog.confirm()
-                .title('Deseja mesmo eliminar o projeto?')
+                .title('Do you really want to delete the project?')
                 .ariaLabel('Confirm')
                 .targetEvent(ev)
-                .ok('Sim')
+                .ok('Yes')
                 .cancel('Cancel');
 
             $mdDialog.show(confirm).then(() => {
@@ -200,6 +200,11 @@
 
         self.toogleProjectsSideBar = (componentId) => {
             return $mdSidenav(componentId).toggle();
+        };
+
+        self.logout = () => {
+            UtilsService.cleanStorage();
+            $location.path('/login');
         };
     }
 }());

@@ -12,19 +12,19 @@
     </div>
     <div flex="none" layout="row" layout-align="center center" ng-if="!data.isDisabled">
         <div ng-if="isEditing">
-            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="onEdit()">
+            <md-button class="md-icon-button" ng-click="onEdit()">
                 <md-icon md-icon md-menu-origin>
                     <span class="material-icons-outlined">check</span>
                 </md-icon>
             </md-button>
-            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="changeEditStatus()">
+            <md-button class="md-icon-button" ng-click="changeEditStatus()">
                 <md-icon md-icon md-menu-origin>
                     <span class="material-icons-outlined">cancel</span>
                 </md-icon>
             </md-button>
         </div>
         <md-menu ng-if="!isEditing">
-            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+            <md-button class="md-icon-button" ng-click="$mdMenu.open($event)">
                 <md-icon md-icon md-menu-origin>
                     <span class="material-icons-outlined">more_vert</span>
                 </md-icon>

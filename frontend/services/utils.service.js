@@ -35,5 +35,9 @@
         this.deleteValueFromStorage = (key) => {
             $window.localStorage[key] = null;
         };
+
+        this.cleanStorage = () => {
+            $window.localStorage.clear();
+        };
     }
 }());
