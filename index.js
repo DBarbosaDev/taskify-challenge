@@ -38,6 +38,6 @@ app.use('/api', apiRoutes);
 
 app.use(express.static('frontend'));
 
-app.listen(configs.SERVER_PORT, () => {
-    console.log(`Server listening on port ${configs.SERVER_PORT}`);
+app.listen(configs.PORT, () => {
+    console.log(`Server listening on port ${configs.PORT}`);
 });
