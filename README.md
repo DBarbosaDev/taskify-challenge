@@ -1,4 +1,4 @@
-# Taskify - Bolttecha challenge
+# Taskify - Code Challenge
 
 ### Setup project dependencies
 ```
